@@ -47,7 +47,7 @@ class APIAuthControllerTest {
                                 .content(mapper.writeValueAsString(adminRequest))
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
@@ -69,7 +69,7 @@ class APIAuthControllerTest {
                                 .content(mapper.writeValueAsString(loginRequest))
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));

@@ -1,5 +1,6 @@
 package com.yunho.management_system.dto;
 
+
 import com.yunho.management_system.constant.EventStatus;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public record EventRequest(
         Integer capacity,
         String memo
 ) {
+
     public static EventRequest of(
             Long placeId,
             String eventName,
@@ -35,4 +37,20 @@ public record EventRequest(
                 memo
         );
     }
+
+    public EventDTO toDTO() {
+        return EventDTO.of(
+                this.placeId(),
+                this.eventName(),
+                this.eventStatus(),
+                this.eventStartDatetime(),
+                this.eventEndDatetime(),
+                this.currentNumberOfPeople(),
+                this.capacity(),
+                this.memo(),
+                null,
+                null
+        );
+    }
+
 }
