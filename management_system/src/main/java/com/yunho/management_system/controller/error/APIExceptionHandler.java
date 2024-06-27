@@ -1,7 +1,7 @@
 package com.yunho.management_system.controller.error;
 
 import com.yunho.management_system.constant.ErrorCode;
-import com.yunho.management_system.dto.APIErrorResponse;
+import com.yunho.management_system.dto.ApiErrorResponse;
 import com.yunho.management_system.exception.GeneralException;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpHeaders;
@@ -42,7 +42,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorCode errorCode, HttpHeaders headers, WebRequest request) {
         return super.handleExceptionInternal(
                 e,
-                APIErrorResponse.of(false, errorCode.getCode(), errorCode.getMessage(e)),
+                ApiErrorResponse.of(false, errorCode.getCode(), errorCode.getMessage(e)),
                 headers,
                 errorCode.getHttpStatus(),
                 request
