@@ -15,20 +15,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-<<<<<<< Updated upstream
 @Disabled("API 컨트롤러가 필요없는 상황이어서 비활성화")
 @DisplayName("API 컨트롤러 - 장소")
 @WebMvcTest(APIPlaceController.class)
 class APIPlaceControllerTest {
-=======
-@WebMvcTest(ApiPlaceController.class)
-class ApiPlaceControllerTest {
->>>>>>> Stashed changes
 
     private final MockMvc mvc;
     private final ObjectMapper mapper;
 
-    public ApiPlaceControllerTest(
+    public APIPlaceControllerTest(
             @Autowired MockMvc mvc,
             @Autowired ObjectMapper mapper
     ) {
@@ -44,7 +39,7 @@ class ApiPlaceControllerTest {
         // When & Then
         mvc.perform(get("/api/places"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))
                 .andExpect(jsonPath("$.data[0].placeName").value("랄라배드민턴장"))
@@ -77,7 +72,7 @@ class ApiPlaceControllerTest {
                                 .content(mapper.writeValueAsString(placeRequest))
                 )
                 .andExpect(status().isCreated())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
@@ -92,7 +87,7 @@ class ApiPlaceControllerTest {
         // When & Then
         mvc.perform(get("/api/places/" + placeId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isMap())
                 .andExpect(jsonPath("$.data.placeType").value(PlaceType.COMMON.name()))
                 .andExpect(jsonPath("$.data.placeName").value("랄라배드민턴장"))
@@ -114,7 +109,7 @@ class ApiPlaceControllerTest {
         // When & Then
         mvc.perform(get("/api/places/" + placeId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isEmpty())
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
@@ -142,7 +137,7 @@ class ApiPlaceControllerTest {
                                 .content(mapper.writeValueAsString(placeRequest))
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
@@ -157,7 +152,7 @@ class ApiPlaceControllerTest {
         // When & Then
         mvc.perform(delete("/api/places/" + placeId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));

@@ -17,17 +17,11 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//@Validated
 @RequiredArgsConstructor
-<<<<<<< Updated upstream
+//@Validated
 //@RequestMapping("/api")
 //@RestController
 public class APIEventController {
-=======
-@RequestMapping("/api")
-@RestController
-public class ApiEventController {
->>>>>>> Stashed changes
 
     private final EventService eventService;
 

@@ -19,24 +19,20 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("핸들러 - API 에러 처리")
-<<<<<<< Updated upstream
 class APIExceptionHandlerTest {
-=======
-class ApiExceptionHandlerTest {
->>>>>>> Stashed changes
 
-    private ApiExceptionHandler sut;
+    private APIExceptionHandler sut;
     private WebRequest webRequest;
 
     @BeforeEach
     void setUp() {
-        sut = new ApiExceptionHandler();
+        sut = new APIExceptionHandler();
         webRequest = new DispatcherServletWebRequest(new MockHttpServletRequest());
     }
 
     @DisplayName("검증 오류 - 응답 데이터 정의")
     @Test
-    void givenValidationException_whenHandlingApiException_thenReturnsResponseEntity() {
+    void givenValidationException_whenCallingValidation_thenReturnsResponseEntity() {
         // Given
         ConstraintViolationException e = new ConstraintViolationException(Set.of());
 
@@ -52,7 +48,7 @@ class ApiExceptionHandlerTest {
 
     @DisplayName("프로젝트 일반 오류 - 응답 데이터 정의")
     @Test
-    void givenGeneralException_whenHandlingApiException_thenReturnsResponseEntity() {
+    void givenGeneralException_whenCallingValidation_thenReturnsResponseEntity() {
         // Given
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;
         GeneralException e = new GeneralException(errorCode);
@@ -69,7 +65,7 @@ class ApiExceptionHandlerTest {
 
     @DisplayName("기타(전체) 오류 - 응답 데이터 정의")
     @Test
-    void givenOtherException_whenHandlingApiException_thenReturnsResponseEntity() {
+    void givenOtherException_whenCallingValidation_thenReturnsResponseEntity() {
         // Given
         Exception e = new Exception();
 

@@ -4,7 +4,7 @@ import com.yunho.management_system.constant.PlaceType;
 
 import java.time.LocalDateTime;
 
-public record PlaceDto(
+public record PlaceDTO(
         PlaceType placeType,
         String placeName,
         String address,
@@ -14,7 +14,7 @@ public record PlaceDto(
         LocalDateTime createdAt,
         LocalDateTime modifiedAt
 ) {
-    public static PlaceDto of(
+    public static PlaceDTO of(
             PlaceType placeType,
             String placeName,
             String address,
@@ -24,6 +24,6 @@ public record PlaceDto(
             LocalDateTime createdAt,
             LocalDateTime modifiedAt
     ) {
-        return new PlaceDto(placeType, placeName, address, phoneNumber, capacity, memo, createdAt, modifiedAt);
+        return new PlaceDTO(placeType, placeName, address, phoneNumber, capacity, memo, createdAt, modifiedAt);
     }
 }

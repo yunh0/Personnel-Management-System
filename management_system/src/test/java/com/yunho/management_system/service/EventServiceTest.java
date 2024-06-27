@@ -5,12 +5,8 @@ import com.querydsl.core.types.Predicate;
 
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
-<<<<<<< Updated upstream
 import com.yunho.management_system.domain.Event;
 import com.yunho.management_system.dto.EventDTO;
-=======
-import com.yunho.management_system.dto.EventDto;
->>>>>>> Stashed changes
 import com.yunho.management_system.exception.GeneralException;
 import com.yunho.management_system.repository.EventRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -47,51 +43,11 @@ class EventServiceTest {
                 ));
 
         // When
-<<<<<<< Updated upstream
         List<EventDTO> list = sut.getEvents(new BooleanBuilder());
 
         // Then
         assertThat(list).hasSize(2);
         then(eventRepository).should().findAll(any(Predicate.class));
-=======
-        List<EventDto> list = sut.getEvents(null, null, null, null, null);
-
-        // Then
-        assertThat(list).hasSize(2);
-        then(eventRepository).should().findEvents(null, null, null, null, null);
-    }
-
-    @DisplayName("검색 조건과 함께 이벤트를 검색하면, 검색 결과를 출력하여 보여준다.")
-    @Test
-    void givenSearchParameters_whenSearchingEvents_thenReturnsEventList() {
-        // Given
-        Long placeId = 1L;
-        String eventName = "오전 운동";
-        EventStatus eventStatus = EventStatus.OPENED;
-        LocalDateTime eventStartDatetime = LocalDateTime.of(2021, 1, 1, 0, 0, 0);
-        LocalDateTime eventEndDatetime = LocalDateTime.of(2021, 1, 2, 0, 0, 0);
-
-        given(eventRepository.findEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime))
-                .willReturn(List.of(
-                        createEventDTO(1L, "오전 운동", eventStatus, eventStartDatetime, eventEndDatetime)
-                ));
-
-        // When
-        List<EventDto> list = sut.getEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
-
-        // Then
-        assertThat(list)
-                .hasSize(1)
-                .allSatisfy(event -> {
-                    assertThat(event)
-                            .hasFieldOrPropertyWithValue("placeId", placeId)
-                            .hasFieldOrPropertyWithValue("eventName", eventName)
-                            .hasFieldOrPropertyWithValue("eventStatus", eventStatus);
-                    assertThat(event.eventStartDatetime()).isAfterOrEqualTo(eventStartDatetime);
-                    assertThat(event.eventEndDatetime()).isBeforeOrEqualTo(eventEndDatetime);
-                });
-        then(eventRepository).should().findEvents(placeId, eventName, eventStatus, eventStartDatetime, eventEndDatetime);
->>>>>>> Stashed changes
     }
 
     @DisplayName("이벤트를 검색하는데 에러가 발생한 경우, 줄서기 프로젝트 기본 에러로 전환하여 예외 던진다.")
@@ -116,16 +72,11 @@ class EventServiceTest {
     void givenEventId_whenSearchingExistingEvent_thenReturnsEvent() {
         // Given
         long eventId = 1L;
-<<<<<<< Updated upstream
         Event event = createEvent(1L, "오전 운동", true);
         given(eventRepository.findById(eventId)).willReturn(Optional.of(event));
-=======
-        EventDto eventDTO = createEventDTO(1L, "오전 운동", true);
-        given(eventRepository.findEvent(eventId)).willReturn(Optional.of(eventDTO));
->>>>>>> Stashed changes
 
         // When
-        Optional<EventDto> result = sut.getEvent(eventId);
+        Optional<EventDTO> result = sut.getEvent(eventId);
 
         // Then
         assertThat(result).hasValue(EventDTO.of(event));
@@ -140,7 +91,7 @@ class EventServiceTest {
         given(eventRepository.findById(eventId)).willReturn(Optional.empty());
 
         // When
-        Optional<EventDto> result = sut.getEvent(eventId);
+        Optional<EventDTO> result = sut.getEvent(eventId);
 
         // Then
         assertThat(result).isEmpty();
@@ -168,13 +119,8 @@ class EventServiceTest {
     @Test
     void givenEvent_whenCreating_thenCreatesEventAndReturnsTrue() {
         // Given
-<<<<<<< Updated upstream
         Event event = createEvent(1L, "오후 운동", false);
         given(eventRepository.save(event)).willReturn(event);
-=======
-        EventDto dto = createEventDTO(1L, "오후 운동", false);
-        given(eventRepository.insertEvent(dto)).willReturn(true);
->>>>>>> Stashed changes
 
         // When
         boolean result = sut.createEvent(EventDTO.of(event));
@@ -220,15 +166,10 @@ class EventServiceTest {
     void givenEventIdAndItsInfo_whenModifying_thenModifiesEventAndReturnsTrue() {
         // Given
         long eventId = 1L;
-<<<<<<< Updated upstream
         Event originalEvent = createEvent(1L, "오후 운동", false);
         Event changedEvent = createEvent(1L, "오전 운동", true);
         given(eventRepository.findById(eventId)).willReturn(Optional.of(originalEvent));
         given(eventRepository.save(changedEvent)).willReturn(changedEvent);
-=======
-        EventDto dto = createEventDTO(1L, "오후 운동", false);
-        given(eventRepository.updateEvent(eventId, dto)).willReturn(true);
->>>>>>> Stashed changes
 
         // When
         boolean result = sut.modifyEvent(eventId, EventDTO.of(changedEvent));
@@ -243,12 +184,7 @@ class EventServiceTest {
     @Test
     void givenNoEventId_whenModifying_thenAbortModifyingAndReturnsFalse() {
         // Given
-<<<<<<< Updated upstream
         Event event = createEvent(1L, "오후 운동", false);
-=======
-        EventDto dto = createEventDTO(1L, "오후 운동", false);
-        given(eventRepository.updateEvent(null, dto)).willReturn(false);
->>>>>>> Stashed changes
 
         // When
         boolean result = sut.modifyEvent(null, EventDTO.of(event));
@@ -341,11 +277,7 @@ class EventServiceTest {
     }
 
 
-<<<<<<< Updated upstream
     private Event createEvent(long placeId, String eventName, boolean isMorning) {
-=======
-    private EventDto createEventDTO(long placeId, String eventName, boolean isMorning) {
->>>>>>> Stashed changes
         String hourStart = isMorning ? "09" : "13";
         String hourEnd = isMorning ? "12" : "16";
 
@@ -358,23 +290,14 @@ class EventServiceTest {
         );
     }
 
-<<<<<<< Updated upstream
     private Event createEvent(
-=======
-    private EventDto createEventDTO(
->>>>>>> Stashed changes
             long placeId,
             String eventName,
             EventStatus eventStatus,
             LocalDateTime eventStartDateTime,
             LocalDateTime eventEndDateTime
     ) {
-<<<<<<< Updated upstream
         return Event.of(
-=======
-        return EventDto.of(
-                1L,
->>>>>>> Stashed changes
                 placeId,
                 eventName,
                 eventStatus,

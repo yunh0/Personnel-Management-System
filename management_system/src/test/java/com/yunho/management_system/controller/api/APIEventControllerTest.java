@@ -1,9 +1,10 @@
 package com.yunho.management_system.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
-import com.yunho.management_system.dto.EventDto;
+import com.yunho.management_system.dto.EventDTO;
 import com.yunho.management_system.dto.EventResponse;
 import com.yunho.management_system.service.EventService;
 import org.junit.jupiter.api.Disabled;
@@ -27,22 +28,17 @@ import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-<<<<<<< Updated upstream
 @Disabled("API 컨트롤러가 필요없는 상황이어서 비활성화")
 @DisplayName("API 컨트롤러 - 이벤트")
 @WebMvcTest(APIEventController.class)
 class APIEventControllerTest {
-=======
-@WebMvcTest(ApiEventController.class)
-class ApiEventControllerTest {
->>>>>>> Stashed changes
 
     private final MockMvc mvc;
     private final ObjectMapper mapper;
 
     @MockBean private EventService eventService;
 
-    public ApiEventControllerTest(
+    public APIEventControllerTest(
             @Autowired MockMvc mvc,
             @Autowired ObjectMapper mapper
     ) {
@@ -330,8 +326,8 @@ class ApiEventControllerTest {
     }
 
 
-    private EventDto createEventDTO() {
-        return EventDto.of(
+    private EventDTO createEventDTO() {
+        return EventDTO.of(
                 1L,
                 1L,
                 "오후 운동",

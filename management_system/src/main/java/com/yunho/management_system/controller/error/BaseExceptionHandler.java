@@ -2,6 +2,7 @@ package com.yunho.management_system.controller.error;
 
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.exception.GeneralException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,30 +15,34 @@ public class BaseExceptionHandler {
     @ExceptionHandler
     public ModelAndView general(GeneralException e) {
         ErrorCode errorCode = e.getErrorCode();
+        HttpStatus status = errorCode.isClientSideError() ?
+                HttpStatus.BAD_REQUEST :
+                HttpStatus.INTERNAL_SERVER_ERROR;
 
         return new ModelAndView(
                 "error",
                 Map.of(
-                        "statusCode", errorCode.getHttpStatus().value(),
+                        "statusCode", status.value(),
                         "errorCode", errorCode,
                         "message", errorCode.getMessage()
                 ),
-                errorCode.getHttpStatus()
+                status
         );
     }
 
     @ExceptionHandler
     public ModelAndView exception(Exception e) {
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
         return new ModelAndView(
                 "error",
                 Map.of(
-                        "statusCode", errorCode.getHttpStatus().value(),
+                        "statusCode", status.value(),
                         "errorCode", errorCode,
                         "message", errorCode.getMessage(e)
                 ),
-                errorCode.getHttpStatus()
+                status
         );
     }
 

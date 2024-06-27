@@ -4,7 +4,7 @@ import com.querydsl.core.types.Predicate;
 
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
-import com.yunho.management_system.dto.EventDto;
+import com.yunho.management_system.dto.EventDTO;
 import com.yunho.management_system.exception.GeneralException;
 import com.yunho.management_system.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,6 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-<<<<<<< Updated upstream
     public List<EventDTO> getEvents(Predicate predicate) {
         try {
             return StreamSupport.stream(eventRepository.findAll(predicate).spliterator(), false)
@@ -33,9 +32,6 @@ public class EventService {
     }
 
     public List<EventDTO> getEvents(
-=======
-    public List<EventDto> getEvents(
->>>>>>> Stashed changes
             Long placeId,
             String eventName,
             EventStatus eventStatus,
@@ -49,7 +45,7 @@ public class EventService {
         }
     }
 
-    public Optional<EventDto> getEvent(Long eventId) {
+    public Optional<EventDTO> getEvent(Long eventId) {
         try {
             return eventRepository.findById(eventId).map(EventDTO::of);
         } catch (Exception e) {
@@ -57,7 +53,7 @@ public class EventService {
         }
     }
 
-    public boolean createEvent(EventDto eventDTO) {
+    public boolean createEvent(EventDTO eventDTO) {
         try {
             if (eventDTO == null) {
                 return false;
@@ -70,7 +66,7 @@ public class EventService {
         }
     }
 
-    public boolean modifyEvent(Long eventId, EventDto dto) {
+    public boolean modifyEvent(Long eventId, EventDTO dto) {
         try {
             if (eventId == null || dto == null) {
                 return false;

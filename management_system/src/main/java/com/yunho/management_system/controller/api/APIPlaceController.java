@@ -9,15 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-<<<<<<< Updated upstream
 //@RequestMapping("/api")
 //@RestController
 public class APIPlaceController {
-=======
-@RequestMapping("/api")
-@RestController
-public class ApiPlaceController {
->>>>>>> Stashed changes
 
     @GetMapping("/places")
     public APIDataResponse<List<PlaceResponse>> getPlaces() {
