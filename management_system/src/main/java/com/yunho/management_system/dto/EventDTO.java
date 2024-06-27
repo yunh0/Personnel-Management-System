@@ -5,7 +5,7 @@ import com.yunho.management_system.domain.Event;
 
 import java.time.LocalDateTime;
 
-public record EventDTO(
+public record EventDto(
         Long id,
         Long placeId,
         String eventName,
@@ -18,7 +18,7 @@ public record EventDTO(
         LocalDateTime createdAt,
         LocalDateTime modifiedAt
 ) {
-    public static EventDTO of(
+    public static EventDto of(
             Long id,
             Long placeId,
             String eventName,
@@ -31,7 +31,7 @@ public record EventDTO(
             LocalDateTime createdAt,
             LocalDateTime modifiedAt
     ) {
-        return new EventDTO(
+        return new EventDto(
                 id,
                 placeId,
                 eventName,

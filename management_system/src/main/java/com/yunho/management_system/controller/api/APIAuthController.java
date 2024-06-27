@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< Updated upstream
 //@RequestMapping("/api")
 //@RestController
 public class APIAuthController {
+=======
+@RequestMapping("/api")
+@RestController
+public class ApiAuthController {
+>>>>>>> Stashed changes
 
     @PostMapping("/sign-up")
     public APIDataResponse<String> signUp(@RequestBody AdminRequest adminRequest) {

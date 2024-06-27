@@ -1,6 +1,10 @@
 package com.yunho.management_system.controller;
 
+<<<<<<< Updated upstream
 import com.yunho.management_system.dto.EventDTO;
+=======
+import com.yunho.management_system.dto.EventDto;
+>>>>>>> Stashed changes
 import com.yunho.management_system.service.EventService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,7 +57,11 @@ class EventControllerTest {
         // Given
         long eventId = 1L;
         given(eventService.getEvent(eventId)).willReturn(Optional.of(
+<<<<<<< Updated upstream
                 EventDTO.of(eventId, null, null, null, null, null, null, null, null, null, null)
+=======
+                EventDto.of(eventId, null, null, null, null, null, null, null, null, null, null)
+>>>>>>> Stashed changes
         ));
 
         // When & Then
@@ -76,7 +84,11 @@ class EventControllerTest {
 
         // When & Then
         mvc.perform(get("/events/" + eventId))
+<<<<<<< Updated upstream
                 .andExpect(status().isBadRequest()) // TODO: 나중에 404로 바꿔보자
+=======
+                .andExpect(status().isNotFound())
+>>>>>>> Stashed changes
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("error"));
 

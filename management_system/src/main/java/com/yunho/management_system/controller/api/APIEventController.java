@@ -19,9 +19,15 @@ import java.util.List;
 
 //@Validated
 @RequiredArgsConstructor
+<<<<<<< Updated upstream
 //@RequestMapping("/api")
 //@RestController
 public class APIEventController {
+=======
+@RequestMapping("/api")
+@RestController
+public class ApiEventController {
+>>>>>>> Stashed changes
 
     private final EventService eventService;
 
