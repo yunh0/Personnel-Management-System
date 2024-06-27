@@ -1,6 +1,6 @@
 package com.yunho.management_system.controller;
 
-import com.yunho.management_system.dto.EventDTO;
+import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.service.EventService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ class EventControllerTest {
         // Given
         long eventId = 1L;
         given(eventService.getEvent(eventId)).willReturn(Optional.of(
-                EventDTO.of(eventId, null, null, null, null, null, null, null, null, null, null)
+                EventDto.of(eventId, null, null, null, null, null, null, null, null, null, null)
         ));
 
         // When & Then

@@ -4,7 +4,7 @@ import com.querydsl.core.types.Predicate;
 
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
-import com.yunho.management_system.dto.EventDTO;
+import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.exception.GeneralException;
 import com.yunho.management_system.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,17 +21,17 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    public List<EventDTO> getEvents(Predicate predicate) {
+    public List<EventDto> getEvents(Predicate predicate) {
         try {
             return StreamSupport.stream(eventRepository.findAll(predicate).spliterator(), false)
-                    .map(EventDTO::of)
+                    .map(EventDto::of)
                     .toList();
         } catch (Exception e) {
             throw new GeneralException(ErrorCode.DATA_ACCESS_ERROR, e);
         }
     }
 
-    public List<EventDTO> getEvents(
+    public List<EventDto> getEvents(
             Long placeId,
             String eventName,
             EventStatus eventStatus,
@@ -45,15 +45,15 @@ public class EventService {
         }
     }
 
-    public Optional<EventDTO> getEvent(Long eventId) {
+    public Optional<EventDto> getEvent(Long eventId) {
         try {
-            return eventRepository.findById(eventId).map(EventDTO::of);
+            return eventRepository.findById(eventId).map(EventDto::of);
         } catch (Exception e) {
             throw new GeneralException(ErrorCode.DATA_ACCESS_ERROR, e);
         }
     }
 
-    public boolean createEvent(EventDTO eventDTO) {
+    public boolean createEvent(EventDto eventDTO) {
         try {
             if (eventDTO == null) {
                 return false;
@@ -66,7 +66,7 @@ public class EventService {
         }
     }
 
-    public boolean modifyEvent(Long eventId, EventDTO dto) {
+    public boolean modifyEvent(Long eventId, EventDto dto) {
         try {
             if (eventId == null || dto == null) {
                 return false;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
-import com.yunho.management_system.dto.EventDTO;
+import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.dto.EventResponse;
 import com.yunho.management_system.service.EventService;
 import org.junit.jupiter.api.Disabled;
@@ -327,8 +327,8 @@ class APIEventControllerTest {
     }
 
 
-    private EventDTO createEventDTO() {
-        return EventDTO.of(
+    private EventDto createEventDTO() {
+        return EventDto.of(
                 1L,
                 1L,
                 "오후 운동",
