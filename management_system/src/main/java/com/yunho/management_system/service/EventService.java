@@ -1,12 +1,13 @@
 package com.yunho.management_system.service;
 
 import com.querydsl.core.types.Predicate;
-
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
+import com.yunho.management_system.domain.Place;
 import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.exception.GeneralException;
 import com.yunho.management_system.repository.EventRepository;
+import com.yunho.management_system.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.stream.StreamSupport;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final PlaceRepository placeRepository;
 
     public List<EventDto> getEvents(Predicate predicate) {
         try {
@@ -59,7 +61,9 @@ public class EventService {
                 return false;
             }
 
-            eventRepository.save(eventDTO.toEntity());
+            Place place = placeRepository.findById(eventDTO.placeId())
+                    .orElseThrow(() -> new GeneralException(ErrorCode.NOT_FOUND));
+            eventRepository.save(eventDTO.toEntity(place));
             return true;
         } catch (Exception e) {
             throw new GeneralException(ErrorCode.DATA_ACCESS_ERROR, e);
