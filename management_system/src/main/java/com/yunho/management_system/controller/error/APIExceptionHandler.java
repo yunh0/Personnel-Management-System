@@ -3,6 +3,7 @@ package com.yunho.management_system.controller.error;
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.dto.APIErrorResponse;
 import com.yunho.management_system.exception.GeneralException;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.validation.ConstraintViolationException;
 
-@RestControllerAdvice(annotations = RestController.class)
+@RestControllerAdvice(annotations = {RestController.class, RepositoryRestController.class})
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
