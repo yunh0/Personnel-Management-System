@@ -5,8 +5,6 @@ import com.yunho.management_system.dto.AdminRequest;
 import com.yunho.management_system.dto.LoginRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Spring Data REST 로 API 를 만들어서 당장 필요가 없어진 컨트롤러.
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Deprecated
 //@RequestMapping("/api")
 //@RestController
-public class APIAuthController {
+public class ApiAuthController {
 
     @PostMapping("/sign-up")
     public APIDataResponse<String> signUp(@RequestBody AdminRequest adminRequest) {

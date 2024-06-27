@@ -8,7 +8,6 @@ import com.yunho.management_system.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,7 +28,7 @@ import java.util.List;
 //@Validated
 //@RequestMapping("/api")
 //@RestController
-public class APIEventController {
+public class ApiEventController {
 
     private final EventService eventService;
 
