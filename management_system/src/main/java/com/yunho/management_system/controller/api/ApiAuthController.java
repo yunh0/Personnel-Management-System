@@ -1,6 +1,6 @@
 package com.yunho.management_system.controller.api;
 
-import com.yunho.management_system.dto.APIDataResponse;
+import com.yunho.management_system.dto.ApiDataResponse;
 import com.yunho.management_system.dto.AdminRequest;
 import com.yunho.management_system.dto.LoginRequest;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ApiAuthController {
 
     @PostMapping("/sign-up")
-    public APIDataResponse<String> signUp(@RequestBody AdminRequest adminRequest) {
-        return APIDataResponse.empty();
+    public ApiDataResponse<String> signUp(@RequestBody AdminRequest adminRequest) {
+        return ApiDataResponse.empty();
     }
 
     @PostMapping("/login")
-    public APIDataResponse<String> login(@RequestBody LoginRequest loginRequest) {
-        return APIDataResponse.empty();
+    public ApiDataResponse<String> login(@RequestBody LoginRequest loginRequest) {
+        return ApiDataResponse.empty();
     }
 
 }

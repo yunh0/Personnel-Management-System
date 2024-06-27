@@ -1,7 +1,7 @@
 package com.yunho.management_system.controller.error;
 
 import com.yunho.management_system.constant.ErrorCode;
-import com.yunho.management_system.dto.APIErrorResponse;
+import com.yunho.management_system.dto.ApiErrorResponse;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,13 +33,13 @@ public class BaseErrorController implements ErrorController {
     }
 
     @RequestMapping("/error")
-    public ResponseEntity<APIErrorResponse> error(HttpServletResponse response) {
+    public ResponseEntity<ApiErrorResponse> error(HttpServletResponse response) {
         HttpStatus status = HttpStatus.valueOf(response.getStatus());
         ErrorCode errorCode = status.is4xxClientError() ? ErrorCode.BAD_REQUEST : ErrorCode.INTERNAL_ERROR;
 
         return ResponseEntity
                 .status(status)
-                .body(APIErrorResponse.of(false, errorCode));
+                .body(ApiErrorResponse.of(false, errorCode));
     }
 
 }
