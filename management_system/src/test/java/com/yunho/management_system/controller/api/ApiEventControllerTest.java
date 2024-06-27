@@ -1,11 +1,12 @@
 package com.yunho.management_system.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
+import com.yunho.management_system.constant.PlaceType;
 import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.dto.EventResponse;
+import com.yunho.management_system.dto.PlaceDto;
 import com.yunho.management_system.service.EventService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -108,7 +109,7 @@ class ApiEventControllerTest {
         // Given
         EventResponse eventResponse = EventResponse.of(
                 1L,
-                1L,
+                createPlaceDto(1L),
                 "오후 운동",
                 EventStatus.OPENED,
                 LocalDateTime.of(2021, 1, 1, 13, 0, 0),
@@ -140,7 +141,7 @@ class ApiEventControllerTest {
         // Given
         EventResponse eventResponse = EventResponse.of(
                 1L,
-                0L,
+                createPlaceDto(0L),
                 "  ",
                 null,
                 null,
@@ -235,7 +236,7 @@ class ApiEventControllerTest {
         long eventId = 1L;
         EventResponse eventResponse = EventResponse.of(
                 eventId,
-                1L,
+                createPlaceDto(1L),
                 "오후 운동",
                 EventStatus.OPENED,
                 LocalDateTime.of(2021, 1, 1, 13, 0, 0),
@@ -268,7 +269,7 @@ class ApiEventControllerTest {
         long eventId = 0L;
         EventResponse eventResponse = EventResponse.of(
                 eventId,
-                0L,
+                createPlaceDto(0L),
                 "  ",
                 null,
                 null,
@@ -330,7 +331,7 @@ class ApiEventControllerTest {
     private EventDto createEventDTO() {
         return EventDto.of(
                 1L,
-                1L,
+                createPlaceDto(1L),
                 "오후 운동",
                 EventStatus.OPENED,
                 LocalDateTime.of(2021, 1, 1, 13, 0, 0),
@@ -338,6 +339,20 @@ class ApiEventControllerTest {
                 0,
                 24,
                 "마스크 꼭 착용하세요",
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
+    private PlaceDto createPlaceDto(Long placeId) {
+        return PlaceDto.of(
+                placeId,
+                PlaceType.COMMON,
+                "배드민턴장",
+                "서울시 가나구 다라동",
+                "010-1111-2222",
+                10,
+                null,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );

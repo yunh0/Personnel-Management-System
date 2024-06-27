@@ -2,9 +2,11 @@ package com.yunho.management_system.controller;
 
 import com.querydsl.core.types.Predicate;
 
+import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.domain.Place;
 import com.yunho.management_system.dto.PlaceResponse;
 import com.yunho.management_system.exception.GeneralException;
+import com.yunho.management_system.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.stereotype.Controller;
