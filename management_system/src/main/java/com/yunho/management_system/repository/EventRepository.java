@@ -5,6 +5,7 @@ import com.querydsl.core.types.dsl.StringExpression;
 
 import com.yunho.management_system.domain.Event;
 import com.yunho.management_system.domain.QEvent;
+import com.yunho.management_system.repository.querydsl.EventRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -12,6 +13,7 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 
 public interface EventRepository extends
         JpaRepository<Event, Long>,
+        EventRepositoryCustom,
         QuerydslPredicateExecutor<Event>,
         QuerydslBinderCustomizer<QEvent> {
 
