@@ -67,3 +67,10 @@ tasks.withType(JavaCompile) {
 clean {
     delete file(generated)
 }
+
+//// Heroku 설정
+jar {
+    manifest {
+        attributes('Main-Class': 'com.yunho.management_system.ManagementSystemApplication')
+    }
+}
