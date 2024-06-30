@@ -31,14 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/events/**", "/places/**").permitAll()
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .permitAll()
+                    .permitAll()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/admin/places")
                 .and()
                 .logout()
-                .permitAll()
-                .logoutSuccessUrl("/");
+                    .permitAll()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/");
     }
 
 }
