@@ -3,6 +3,7 @@ package com.yunho.management_system.service;
 import com.querydsl.core.types.Predicate;
 import com.yunho.management_system.constant.ErrorCode;
 import com.yunho.management_system.constant.EventStatus;
+import com.yunho.management_system.domain.Event;
 import com.yunho.management_system.domain.Place;
 import com.yunho.management_system.dto.EventDto;
 import com.yunho.management_system.dto.EventViewResponse;
@@ -11,6 +12,7 @@ import com.yunho.management_system.repository.EventRepository;
 import com.yunho.management_system.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,6 +68,25 @@ public class EventService {
     public Optional<EventDto> getEvent(Long eventId) {
         try {
             return eventRepository.findById(eventId).map(EventDto::of);
+        } catch (Exception e) {
+            throw new GeneralException(ErrorCode.DATA_ACCESS_ERROR, e);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EventViewResponse> getEvent(Long placeId, Pageable pageable) {
+        try {
+            Place place = placeRepository.getById(placeId);
+            Page<Event> eventPage = eventRepository.findByPlace(place, pageable);
+
+            return new PageImpl<>(
+                    eventPage.getContent()
+                            .stream()
+                            .map(event -> EventViewResponse.from(EventDto.of(event)))
+                            .toList(),
+                    eventPage.getPageable(),
+                    eventPage.getTotalElements()
+            );
         } catch (Exception e) {
             throw new GeneralException(ErrorCode.DATA_ACCESS_ERROR, e);
         }

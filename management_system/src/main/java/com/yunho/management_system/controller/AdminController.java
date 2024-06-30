@@ -13,7 +13,10 @@ import com.yunho.management_system.exception.GeneralException;
 import com.yunho.management_system.service.EventService;
 import com.yunho.management_system.service.PlaceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,16 +55,21 @@ public class AdminController {
     }
 
     @GetMapping("/places/{placeId}")
-    public ModelAndView adminPlaceDetail(@PathVariable Long placeId) {
+    public ModelAndView adminPlaceDetail(
+            @PathVariable Long placeId,
+            @PageableDefault Pageable pageable
+    ) {
         PlaceResponse place = placeService.getPlace(placeId)
                 .map(PlaceResponse::from)
                 .orElseThrow(() -> new GeneralException(ErrorCode.NOT_FOUND));
+        Page<EventViewResponse> events = eventService.getEvent(placeId, pageable);
 
         return new ModelAndView(
                 "admin/place-detail",
                 Map.of(
                         "adminOperationStatus", AdminOperationStatus.MODIFY,
                         "place", place,
+                        "events", events,
                         "placeTypeOption", PlaceType.values()
                 )
         );

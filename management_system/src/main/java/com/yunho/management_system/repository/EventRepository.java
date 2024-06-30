@@ -2,10 +2,12 @@ package com.yunho.management_system.repository;
 
 import com.querydsl.core.types.dsl.ComparableExpression;
 import com.querydsl.core.types.dsl.StringExpression;
-
 import com.yunho.management_system.domain.Event;
+import com.yunho.management_system.domain.Place;
 import com.yunho.management_system.domain.QEvent;
 import com.yunho.management_system.repository.querydsl.EventRepositoryCustom;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
@@ -16,6 +18,8 @@ public interface EventRepository extends
         EventRepositoryCustom,
         QuerydslPredicateExecutor<Event>,
         QuerydslBinderCustomizer<QEvent> {
+
+    Page<Event> findByPlace(Place place, Pageable pageable);
 
     @Override
     default void customize(QuerydslBindings bindings, QEvent root) {
