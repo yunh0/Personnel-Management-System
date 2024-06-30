@@ -41,7 +41,7 @@ public record EventRequest(
         );
     }
 
-    public EventDto toDTO() {
+    public EventDto toDtO() {
         return EventDto.of(
                 null,
                 null,
